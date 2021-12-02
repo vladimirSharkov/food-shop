@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragment/commons::head">
+
+<body>
+<!-Navigation -->
+<div th:replace="fragment/commons::nav"></div>
+
+<!-Product-->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>All Products</h2>
+        <select onclick="myFunction()">
+            <option>Default Shorting</option>
+            <option >Short by price</option>
+            <option>Short by sale</option>
+        </select>
+    </div>
+
+
+    <div class="row">
+        <div id="products"  class="product text-center col-lg-3 col-md-4 col-12" th:each="p:${productsView}" th:object="${p}" >
+            <img class="img-fluid mb-3" th:src="*{imageUrl}" width="200px" height="300px">
+            <h5 th:text="|Product Name: *{name}|" class="productName">Bio Baby puree </h5>
+            <h4 th:text="|Product Price: &#36*{price}|" class="productPrice">$1.99</h4>
+            <form  th:action="@{/product/details/{id}(id = *{id})}"  >
+                <button type="submit" class="buy-btn">Buy Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-Footer-->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Product</h3>
+                <ul>
+                    <li>Bio</li>
+                    <li>Meat and fish</li>
+                    <li>Dairy and eggs</li>
+                    <li>Bread and pasta</li>
+                    <li>Drinks</li>
+                </ul>
+            </div>
+            <div class="footer-col-2">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-3">
+                <h3>Follow us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Google</li>
+                    <li>Instagram</li>
+                    <li>Linkedin</li>
+                </ul>
+            </div>
+        </div>
+        <p class="copyright">FOOD-SHOP 2021 ©Copyright</p>
+    </div>
+</div>
+
+
+<script src="/js/toggleMenu.js"></script>
+<script src="/js/dropdown.js"></script>
+<script src="/js/sortByPrice.js"></script>
+
+</body>
+</html>

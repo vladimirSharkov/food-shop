@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/commons::head">
+</head>
+<body>
+<!-Navigation -->
+<div th:replace="fragment/commons::nav"></div>
+
+<!-Account page->
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                <h2 class="text-center text-white">Register User</h2>
+                <form
+                        th:action="@{/users/register}"
+                        th:method="post"
+                        th:object="${userModel}"
+                        class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <input
+                                    id="username"
+                                    th:field="*{username}"
+                                    th:errorclass="is-invalid"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="User Name"/>
+                            <p class="invalid-feedback errors alert alert-danger">
+                                First name is required and should be between 4 and 20 symbols.
+                            </p>
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                            <input id="fullName"
+                                   name="fullName"
+                                   th:field="*{fullName}"
+                                   th:errorclass="is-invalid"
+                                   type="text" min="2" max="20" class="form-control"
+                                   placeholder="Full name"/>
+                            <p class="invalid-feedback errors alert alert-danger">
+                                Last name is required and should be between 4 and 20 symbols.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <input id="email"
+                                   name="email"
+                                   th:field="*{email}"
+                                   th:errorclass="is-invalid"
+                                   type="text" min="2" max="20" class="form-control"
+                                   placeholder="Email"/>
+                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                               class="invalid-feedback errors alert alert-danger">
+                                Username is required.
+                            </p>
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                            <input id="address"
+                                   name="address"
+                                   th:field="*{address}"
+                                   th:errorclass="is-invalid"
+                                   type="text" min="2" max="20" class="form-control"
+                                   placeholder="Address"/>
+                            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+                               class="invalid-feedback errors alert alert-danger">
+                                Username is required.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <input id="password"
+                                   name="password"
+                                   th:field="*{password}"
+                                   th:errorclass="is-invalid"
+                                   type="password" min="2" max="20" class="form-control"
+                                   placeholder="Password"/>
+                            <p class="invalid-feedback errors alert alert-danger">
+                                Password is required.
+                            </p>
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                            <input id="confirmPassword"
+                                   th:field="*{confirmPassword}"
+                                   th:errorclass="is-invalid"
+                                   type="password" min="2" max="20" class="form-control"
+                                   placeholder="Confirm your password"/>
+                            <p class="invalid-feedback errors alert alert-danger">
+                                Confirmation password is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-4">
+                            <div class="button-holder d-flex">
+                                <button type="submit" class="btn">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-Footer-->
+<div th:replace="fragment/commons::footer"></div>
+
+<script src="/js/toggleMenu.js"></script>
+<script src="/js/dropdown.js"></script>
+
+</body>
+</html>

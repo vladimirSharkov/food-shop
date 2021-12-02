@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "spring.servlet.sql.init.mode",
+      "type": "java.lang.String",
+      "description": "Description for spring.servlet.sql.init.mode."
+    },
+    {
+      "name": "spring.jpa.spring.jpa.properties.hibernate.globally_quoted_identifiers=true",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.spring.jpa.properties.hibernate.globally_quoted_identifiers=true."
+    }
+  ] }

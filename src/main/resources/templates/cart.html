@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragment/commons::head">
+
+<body>
+<!-Navigation -->
+<div th:replace="fragment/commons::nav"></div>
+
+<!-Card item details->
+<div class="small-container card-page" >
+
+    <div th:if="${orders.isEmpty()}" th:text="|There are no items in your cart.|"></div>
+
+    <table th:unless="${orders.isEmpty()}">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        <tr th:each="o:${orders}"  th:object="${o}" >
+            <td >
+                <div  class="card-info">
+                    <img th:src="*{products.imageUrl}" >
+                    <div >
+                        <p th:text="*{products.name}">Baby Food</p>
+                        <small th:text="*{products.price}">Price: $55.00</small>
+                        <br>
+                        <a th:href="@{'/carts/delete/{id}' (id = *{id})}">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td th:text="*{count}"></td>
+            <td th:text="*{totalPrice}">$55.00</td>
+        </tr>
+    </table>
+    <div th:object="${cart}"  class="total-price">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td th:text="*{totalPrice}">$175.00</td>
+            </tr>
+        </table>
+    </div>
+    <a th:href="@{/carts/buy}"  type="submit" class="buy-btn">Buy</a>
+</div>
+
+
+<!-Footer-->
+<div th:replace="fragment/commons::footer"></div>
+
+
+<script src="/js/toggleMenu.js"></script>
+<script src="/js/dropdown.js"></script>
+
+
+</body>
+</html>

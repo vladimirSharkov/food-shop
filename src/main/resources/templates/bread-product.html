@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragment/commons::head">
+
+<body>
+<!-Navigation -->
+<div th:replace="fragment/commons::nav"></div>
+
+<!-Product-->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Bread and Pasta Products</h2>
+        <select>
+            <option>Default Shorting</option>
+            <option>Short by price</option>
+            <option>Short by sale</option>
+        </select>
+    </div>
+
+
+    <div  class="row">
+        <div  class="product text-center col-lg-3 col-md-4 col-12" th:each="p:${breadProduct}" th:object="${p}">
+            <img class="img-fluid mb-3" th:src="*{imageUrl}" width="200px">
+            <h5 th:text="|Product Name: *{name}|" class="productName">Bio Baby puree </h5>
+            <h4 th:text="|Product Price: &#36*{price}|" class="productPrice">$1.99</h4>
+            <form  th:action="@{/product/details/{id}(id = *{id})}"  >
+                <button type="submit" class="buy-btn">Buy Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-Footer-->
+<div th:replace="fragment/commons::footer"></div>
+
+
+<script src="/js/toggleMenu.js"></script>
+<script src="/js/dropdown.js"></script>
+
+</body>
+</html>
