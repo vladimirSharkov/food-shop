@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </td>
-            <td th:text="*{count}"></td>
+            <td th:text="*{count}" ></td>
             <td th:text="*{totalPrice}">$55.00</td>
         </tr>
     </table>
@@ -43,7 +43,10 @@
             </tr>
         </table>
     </div>
-    <a th:href="@{/carts/buy}"  type="submit" class="buy-btn">Buy</a>
+    <a th:href="@{/carts/buy}"   type="submit" class="buy-btn">Buy</a>
+    <p class="invalid-feedback errors alert alert-danger">
+        First name is required and should be between 4 and 20 symbols.
+    </p>
 </div>
 
 

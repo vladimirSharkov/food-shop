@@ -46,7 +46,7 @@ public class UserRegistrationBindingModel {
         return this;
     }
     @NotBlank(message = "Address cannot be null or empty String!!!")
-    @Size(min = 5, max = 30, message = "Address must be between 5 and 30 characters!!!")
+    @Size(min = 5, max = 50, message = "Address must be between 5 and 50 characters!!!")
     public String getAddress() {
         return address;
     }

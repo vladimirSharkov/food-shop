@@ -9,6 +9,7 @@ import com.example.foodshop.repository.OrderRepository;
 import com.example.foodshop.service.CartService;
 import com.example.foodshop.service.OrderService;
 import com.example.foodshop.service.ProductService;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -57,6 +58,7 @@ public class CartServiceImpl implements CartService {
         cartEntity.setTotalPrice(total);
         cartRepository.saveAndFlush(cartEntity);
     }
+
     @Override
     public void deleteAllOrder(UserEntity user) {
         CartEntity cart = user.getCart();
@@ -64,13 +66,12 @@ public class CartServiceImpl implements CartService {
 
         for (OrderEntity order : cart.getOrders()) {
             ProductEntity products = order.getProducts();
-            if (products.getQuantity().compareTo(0) > 0) {
-                products.setQuantity(products.getQuantity() - order.getCount());
-                productService.setQuantity(products);
-                orderRepository.delete(order);
-                cart.setOrders(new ArrayList<>());
-            }
 
+            products.setQuantity(products.getQuantity() - order.getCount());
+            productService.setQuantity(products);
+
+            orderRepository.delete(order);
+            cart.setOrders(new ArrayList<>());
         }
 
         cartRepository.saveAndFlush(cart);

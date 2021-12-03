@@ -14,6 +14,7 @@ import com.example.foodshop.service.OrderService;
 import com.example.foodshop.service.ProductService;
 import com.example.foodshop.service.UserService;
 import com.example.foodshop.service.impl.FoodShoppUser;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -187,6 +188,7 @@ public class ProductController {
                                    RedirectAttributes redirectAttributes, @PathVariable Long id,
                                    Principal principal, HttpServletRequest request) {
 
+        String referer = request.getHeader("Referer");
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("buyProductBindingModel", buyProductBindingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.buyProductBindingModel"
@@ -196,8 +198,15 @@ public class ProductController {
 
         UserEntity user = userService.getUserByUsername(principal.getName());
         ProductEntity product = productService.getProductById(id);
-        cartService.productAddToCart(user, product, buyProductBindingModel.getQuantity());
-        return "redirect:/carts/add";
+
+
+        if ((product.getQuantity() - buyProductBindingModel.getQuantity()) >= 0) {
+            cartService.productAddToCart(user, product, buyProductBindingModel.getQuantity());
+            return "redirect:/carts/add";
+        } else {
+            redirectAttributes.addFlashAttribute("nameProduct", product.getName());
+            return "redirect:" + referer;
+        }
 
     }
 
@@ -213,25 +222,25 @@ public class ProductController {
         String referent = request.getHeader("Referer");
         productService.deleteProduct(id);
 
-        return "redirect:"+referent;
+        return "redirect:" + referent;
     }
 
     @GetMapping("/edit/{id}")
-    public String editProduct(@PathVariable Long id ,Model model){
+    public String editProduct(@PathVariable Long id, Model model) {
         ProductsViewModel productsViewModel = productService.findById(id);
         ProductEditBindingModel productEditBindingModel = modelMapper
                 .map(productsViewModel, ProductEditBindingModel.class);
-        model.addAttribute("productEditBindingModel",productEditBindingModel);
+        model.addAttribute("productEditBindingModel", productEditBindingModel);
         return "update";
     }
 
     @PatchMapping("/edit/{id}")
-    public String editProductPatch(@PathVariable Long id,@Valid ProductEditBindingModel productEditBindingModel,
-                                   BindingResult bindingResult,RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("productEditBindingModel",productEditBindingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.productEditBindingModel",bindingResult);
-            return "redirect:/edit"+id;
+    public String editProductPatch(@PathVariable Long id, @Valid ProductEditBindingModel productEditBindingModel,
+                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("productEditBindingModel", productEditBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.productEditBindingModel", bindingResult);
+            return "redirect:/edit" + id;
         }
         ProductEditServiceModel productEditServiceModel = modelMapper.map(productEditBindingModel, ProductEditServiceModel.class);
         productService.updateProduct(productEditServiceModel);

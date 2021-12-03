@@ -20,8 +20,9 @@
             <h4 th:text="|Product Price: &#36 *{price}|">$1</h4>
             <form th:action="@{/product/addProduct/{id}(id=${productDetails.id})}" th:method="POST" th:object="${buyProductBindingModel}">
                 <label for="quantity">Product Quantity:</label>
-                <input th:field="*{quantity}" type="number" id="quantity" name="quantity" min="1">
+                <input th:field="*{quantity}" th:errorclass="is-invalid" type="number" id="quantity" name="quantity" min="1">
                 <button type="submit" class="buy-btn">Add To Card</button>
+                <h4  th:if="${nameProduct} == ${productDetails.name}" th:text="|Availabel quantity: ${productDetails.quantity}|" ></h4>
             </form>
             <h3>Product Description:<i class="fas fa-indent"></i></h3>
             <p th:text="*{description}">Large, nutty pudding is best mixed with melted salsa verde.</p>

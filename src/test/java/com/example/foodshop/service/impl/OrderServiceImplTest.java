@@ -4,25 +4,21 @@ import com.example.foodshop.model.entity.*;
 import com.example.foodshop.model.enumeration.CategoryNameEnum;
 import com.example.foodshop.model.enumeration.RoleNameEnum;
 import com.example.foodshop.repository.OrderRepository;
-import org.junit.jupiter.api.Assertions;
+import com.example.foodshop.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class OrderServiceImplTest {
 
     private OrderServiceImpl serviceToTest;
+    private ProductService productService;
     private OrderEntity orderEntity;
     private ProductEntity product;
     private CartEntity cart;
@@ -50,7 +46,7 @@ class OrderServiceImplTest {
         cart = new CartEntity();
         cart.setUser(user).setTotalPrice(BigDecimal.valueOf(3)).setOrders(List.of(orderEntity));
 
-        serviceToTest = new OrderServiceImpl(mockOrderRepository);
+        serviceToTest = new OrderServiceImpl(mockOrderRepository, productService);
         orderEntity =new OrderEntity();
         orderEntity.setCount(2)
                 .setProducts(product)
