@@ -1,5 +1,6 @@
 package com.example.foodshop.model.binding;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -45,8 +46,8 @@ public class UserRegistrationBindingModel {
         this.email = email;
         return this;
     }
+    @Lob
     @NotBlank(message = "Address cannot be null or empty String!!!")
-    @Size(min = 5, max = 50, message = "Address must be between 5 and 50 characters!!!")
     public String getAddress() {
         return address;
     }

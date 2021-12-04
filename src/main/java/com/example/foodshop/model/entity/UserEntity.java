@@ -63,7 +63,7 @@ public class UserEntity extends BaseEntity {
         return this;
     }
     @Column(nullable = false)
-    @Size(min = 5 ,max = 30)
+    @Lob
     public String getAddress() {
         return address;
     }
