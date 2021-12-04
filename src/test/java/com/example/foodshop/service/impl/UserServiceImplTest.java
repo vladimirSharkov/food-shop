@@ -86,17 +86,6 @@ class UserServiceImplTest {
         Assertions.assertEquals(Optional.of(user), userEntity);
     }
 
-//    @Test
-//    void testRegister(){
-//        UserRegistrationBindingModel userRegistrationBindingModel = new UserRegistrationBindingModel()
-//                .setUsername("Vlado").setEmail("vlado@vlado.com").setAddress("vlado132").setFullName("VLado Sharkov")
-//                .setPassword("12345").setConfirmPassword("12345");
-//
-//
-//        serviceToTest.registerAndLoginUser(userRegistrationServiceModel);
-//
-//        Assertions.assertEquals(2,mockUserRepository.count());
-//    }
 
 
 }

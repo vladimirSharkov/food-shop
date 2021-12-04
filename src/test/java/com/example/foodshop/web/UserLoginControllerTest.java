@@ -70,17 +70,6 @@ class UserLoginControllerTest {
                 .andExpect(view().name("login"));
     }
 
-//    @Test
-//    void testLoginError() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.post("/users/login-error")
-//                .param("username","fff")
-//                .param("password","123")
-//                .with(csrf()))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(flash().attributeExists("bad_credentials", "username"))
-//                .andExpect(redirectedUrl("/users/login"));
-//    }
-
 
 
 }

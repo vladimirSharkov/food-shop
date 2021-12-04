@@ -51,28 +51,7 @@ class UserRegistrationControllerTest {
                 .andExpect(view().name("register"));
     }
 
-//    @Test
-//    void testRegisterUser() throws Exception {
-//
-//        mockMvc
-//                .perform(
-//                        post("/users/register")
-//                                .param("username", "vlado")
-//                                .param("fullName", "vlado vlado")
-//                                .param("email", "vlado@avlado.com")
-//                                .param("address", "vlado123")
-//                                .param("password", "12345")
-//                                .param("confirmPassword", "12345")
-//                                .with(csrf())
-//                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)).
-//                andExpect(status().is3xxRedirection())
-//                        .andExpect(view().name("/users/login"));
-//
-//        Assertions.assertEquals(2, userRepository.count());
-//        Optional<UserEntity> newCreatedUser = userRepository.findByUsername("vlado");
-//        Assertions.assertTrue(newCreatedUser.isPresent());
-//
-//    }
+
 
     @Test
     void test() throws Exception {

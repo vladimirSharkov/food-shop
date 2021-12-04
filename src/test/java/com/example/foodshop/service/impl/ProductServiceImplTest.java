@@ -98,11 +98,6 @@ class ProductServiceImplTest {
         Assertions.assertEquals(product1,byIdProduct);
     }
 
-//    @Test
-//    void testFindById(){
-//        when(mockProductRepository.findById(2L)).thenReturn(Optional.of(product1));
-//        ProductsViewModel byId = serviceToTest.findById(2L);
-//        Assertions.assertEquals(byId.getName(),product.getName());
-//    }
+
 
 }
