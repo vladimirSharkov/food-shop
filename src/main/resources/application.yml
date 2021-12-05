@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/hotShop?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
-    username: root
-    password: 1234
+    driverClassName: org.postgresql.Driver
+    url: =${JDBC_DATABASE_URL:}
+    username: ${JDBC_DATABASE_USERNAME:}
+    password: ${JDBC_DATABASE_PASSWORD:}
   servlet:
     multipart:
       max-file-size: 1MB
@@ -18,7 +18,9 @@ spring:
   jpa:
     # Choose either MySQL 8 or MySQL 5 below
     # For MySQL 8
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+   # database-platform: org.hibernate.dialect.MySQL8Dialect
+    #PostgresSQL dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     #For MySQL 5
     #database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
@@ -33,3 +35,6 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+    server:
+      port=${PORT:8080}:
