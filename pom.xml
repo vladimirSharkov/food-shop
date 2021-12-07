@@ -10,8 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>food-shop</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>food-shop</name>
+
     <description>food-shop</description>
     <properties>
         <java.version>17</java.version>
