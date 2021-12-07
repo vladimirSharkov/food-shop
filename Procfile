@@ -1,1 +1,1 @@
-web: java -jar target/food-shop.jar
+web: java -jar target/food-shop-0.0.1-SNAPSHOT.jar
